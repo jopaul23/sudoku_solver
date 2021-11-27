@@ -70,6 +70,8 @@ class SudokkuSolver {
   ///Empty slot is obtained by checking the cell having value 0.
   SudokkuCell? findFirstEmptySlot() {
     SudokkuCell? cell;
+
+    // print(toList());
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
         if (board[i][j].value == 0) {
@@ -79,6 +81,7 @@ class SudokkuSolver {
       }
       if (cell != null) break;
     }
+
     return cell;
   }
 
@@ -86,17 +89,24 @@ class SudokkuSolver {
   SudokkuCell? _check(SudokkuCell cell, bool isFound) {
     if (isFound) {
       if (cell.value >= 9) {
-        // check for othrt numbers ranging from 1-9
         cell.value = 0;
         if (completedCells.isNotEmpty) {
           //if the [completedCells] is empty then there is no solution.
           cell = completedCells.removeLast();
+          //if the value of the cell is 9 ,then previous cell in which value is added is taken
+          while (cell.value == 9) {
+            cell.value = 0;
+            cell = completedCells.removeLast();
+          }
+
+          _findNextSlot = false;
         } else {
           print("NULL");
           return null;
         }
+      } else {
+        _findNextSlot = false;
       }
-      _findNextSlot = false;
     }
     return cell;
   }
@@ -116,7 +126,6 @@ class SudokkuSolver {
       }
 
       currentCell?.value = currentCell.value + 1;
-
       //check row wise
       for (int i = 0; i < 9; i++) {
         if (board[i][currentCell!.col].value == currentCell.value &&
@@ -133,8 +142,6 @@ class SudokkuSolver {
       } else if (found) {
         continue;
       }
-      //reseting
-      found = false;
 
       //check column wise
 
@@ -185,15 +192,15 @@ class SudokkuSolver {
 
 void main() {
   List<List<int>> board = [
-    [0, 0, 8, 0, 0, 0, 0, 4, 0],
-    [9, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 3, 9, 0, 2, 0],
-    [0, 0, 0, 5, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 5, 0, 7],
-    [4, 0, 0, 7, 0, 0, 0, 0, 8],
-    [0, 1, 0, 0, 6, 0, 0, 0, 0],
-    [0, 4, 0, 2, 1, 0, 0, 0, 0],
-    [8, 7, 5, 3, 0, 0, 0, 0, 0]
+    [2, 5, 0, 0, 0, 9, 0, 0, 0],
+    [6, 1, 0, 0, 0, 0, 9, 0, 0],
+    [0, 0, 4, 0, 0, 0, 0, 7, 6],
+    [0, 0, 0, 9, 6, 2, 0, 0, 0],
+    [0, 0, 9, 0, 0, 5, 3, 0, 0],
+    [5, 6, 0, 0, 7, 0, 0, 0, 0],
+    [0, 0, 0, 0, 5, 0, 0, 0, 2],
+    [7, 0, 5, 2, 0, 8, 0, 0, 0],
+    [8, 0, 0, 0, 0, 0, 7, 5, 1]
   ];
 
   SudokkuSolver solver = SudokkuSolver.fromList(board);
