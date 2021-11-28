@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku/screens/home_page/home_page_layout.dart';
+import 'package:sudoku/screens/sudoku_puzzle/puzzle_page_layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const HomePageLayout());
+        home: const PuzzlePageLayout());
   }
 }
