@@ -12,27 +12,45 @@ class SudokuTable extends StatelessWidget {
   // final SudokuController sudokuController;
   @override
   Widget build(BuildContext context) {
+    double topLeft = 0, bottomLeft = 0, topRight = 0, bottomRight = 0;
+
     SudokuController sudokuController = Get.find<SudokuController>();
     return Container(
       width: MediaQuery.of(context).size.width - defaultPadding * 2,
       height: MediaQuery.of(context).size.width - defaultPadding * 2,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(defaultPadding),
+        borderRadius: BorderRadius.circular(5),
         border: Border.all(width: 1, color: SudokuPageColors.sudokuLineColor),
       ),
       child: Column(
         children: [
-          for (int i = 0; i < 9; i++)
+          for (int i = 0; i < 3; i++)
             Row(
               children: [
-                for (int j = 0; j < 9; j++)
-                  GetBuilder<SudokuController>(builder: (context) {
-                    return SudokuCell(
-                      // sudokuController: sudokuController,
-                      rowNumber: i,
-                      columNumber: j,
-                    );
-                  })
+                for (int j = 0; j < 3; j++)
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: .4),
+                      borderRadius: sudokuController.defineBorderRadius(i, j),
+                    ),
+                    child: Column(
+                      children: [
+                        for (int k = 0; k < 3; k++)
+                          Row(
+                            children: [
+                              for (int l = 0; l < 3; l++)
+                                GetBuilder<SudokuController>(
+                                    builder: (context) {
+                                  return SudokuCell(
+                                    rowNumber: i * 3 + k,
+                                    columNumber: j * 3 + l,
+                                  );
+                                })
+                            ],
+                          )
+                      ],
+                    ),
+                  ),
               ],
             )
         ],

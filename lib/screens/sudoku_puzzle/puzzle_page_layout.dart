@@ -42,12 +42,10 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
           ),
           const TopBar(),
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
-          SudokuTable(
-              // sudokuController: sudokuController,
-              ),
-          SizedBox(
+          const SudokuTable(),
+          const SizedBox(
             height: 50,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
