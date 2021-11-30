@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+const double defaultPadding = 16.0;
+
 // common
 class CommonPageColors {
   static final Color bgColor = Color(0xffF4F6FD);

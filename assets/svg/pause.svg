@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="vuesax_outline_pause" data-name="vuesax/outline/pause" transform="translate(-620 -380)">
+    <g id="pause">
+      <path id="Vector" d="M6.39,19.5H2.76C.9,19.5,0,18.64,0,16.86V2.64C0,.86.9,0,2.76,0H6.39C8.25,0,9.15.86,9.15,2.64V16.86C9.15,18.64,8.25,19.5,6.39,19.5ZM2.76,1.5c-1.08,0-1.26.27-1.26,1.14V16.86c0,.87.17,1.14,1.26,1.14H6.39c1.08,0,1.26-.27,1.26-1.14V2.64c0-.87-.17-1.14-1.26-1.14Z" transform="translate(622.25 382.25)" fill="#292d32"/>
+      <path id="Vector-2" data-name="Vector" d="M6.39,19.5H2.76C.9,19.5,0,18.64,0,16.86V2.64C0,.86.9,0,2.76,0H6.39C8.25,0,9.15.86,9.15,2.64V16.86C9.15,18.64,8.25,19.5,6.39,19.5ZM2.76,1.5c-1.08,0-1.26.27-1.26,1.14V16.86c0,.87.17,1.14,1.26,1.14H6.39c1.08,0,1.26-.27,1.26-1.14V2.64c0-.87-.17-1.14-1.26-1.14Z" transform="translate(632.6 382.25)" fill="#292d32"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(620 380)" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

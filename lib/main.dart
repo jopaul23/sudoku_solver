@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sudoku/screens/sudoku_puzzle/puzzle_page_layout.dart';
+import 'package:sudoku/screens/welcome_page/welcome_page_layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +20,8 @@ class MyApp extends StatelessWidget {
         builder: () => MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-              fontFamily: GoogleFonts.poppins(fontSize: 14.sp).fontFamily,
+              fontFamily: GoogleFonts.rubik(fontSize: 14.sp).fontFamily,
             ),
-            home: PuzzlePageLayout()));
+            home: WelcomePage()));
   }
 }
