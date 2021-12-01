@@ -8,6 +8,10 @@ class CommonPageColors {
   static final Color primaryBlue = Color(0xff076AFF);
 }
 
+class ToastColors {
+  static final toastYellow = Color(0xFFE7A519);
+}
+
 //home page
 class HomePageColors {
   static final Color cardColor = Color(0xffECECEC);

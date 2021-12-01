@@ -61,7 +61,7 @@ class _SudokuCellState extends State<SudokuCell> {
                   : borderWidth,
               color: widget.rowNumber == sudokuController.selectedCellRow &&
                       widget.columNumber == sudokuController.selectedCellColumn
-                  ? CommonPageColors.primaryBlue
+                  ? ToastColors.toastYellow.withOpacity(.8)
                   : SudokuPageColors.sudokuLineColor,
             )),
         child: Text(

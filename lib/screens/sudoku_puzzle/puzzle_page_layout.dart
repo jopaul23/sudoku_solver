@@ -1,9 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
+import 'package:sudoku/screens/sudoku_puzzle/function_btns.dart';
+import 'package:sudoku/screens/sudoku_puzzle/number_btn.dart';
 import 'package:sudoku/screens/sudoku_puzzle/sudoku_table.dart';
 import 'package:sudoku/screens/sudoku_puzzle/top_bar.dart';
 
@@ -46,7 +50,11 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
           ),
           const SudokuTable(),
           const SizedBox(
-            height: 50,
+            height: 20,
+          ),
+          CellOptions(),
+          const SizedBox(
+            height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             for (int i = 1; i <= 9; i++)
@@ -56,46 +64,6 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
               ),
           ])
         ],
-      ),
-    );
-  }
-}
-
-class NumberButton extends StatelessWidget {
-  const NumberButton({
-    Key? key,
-    required this.i,
-    required this.sudokuController,
-  }) : super(key: key);
-  final SudokuController sudokuController;
-  final int i;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: GestureDetector(
-        onTap: () {
-          sudokuController.changeCellValue(i);
-          print(
-              "selected cell from numberBtn ${sudokuController.selectedCellRow},${sudokuController.selectedCellColumn}");
-        },
-        child: Container(
-          height: 50,
-          width: 35,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: SudokuPageColors.numberContainerColor,
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            i.toString(),
-            style: TextStyle(
-              color: CommonPageColors.primaryBlue,
-              fontSize: 14.sp,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
       ),
     );
   }
