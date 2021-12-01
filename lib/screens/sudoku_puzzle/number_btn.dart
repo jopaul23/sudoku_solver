@@ -17,7 +17,14 @@ class NumberButton extends StatelessWidget {
     return SizedBox(
       child: GestureDetector(
         onTap: () {
-          sudokuController.changeCellValue(i);
+          if (sudokuController.pencilSelected) {
+            sudokuController.pencilWrite(i);
+          } else if (sudokuController.eraserSelected) {
+            sudokuController.eraserWrite(i);
+          } else {
+            sudokuController.changeCellValue(i);
+          }
+
           print(
               "selected cell from numberBtn ${sudokuController.selectedCellRow},${sudokuController.selectedCellColumn}");
         },

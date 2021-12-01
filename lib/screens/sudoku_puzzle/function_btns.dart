@@ -17,21 +17,29 @@ class CellOptions extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           OptionsContainer(
+            id: 0,
+            type: 0,
             icon: "assets/svg/pencil.svg",
             text: "pencil",
             ontapFunc: _onPenciTap,
           ),
           OptionsContainer(
+            id: 1,
+            type: 0,
             icon: "assets/svg/eraser.svg",
             text: "eraser",
             ontapFunc: _onEraserTap,
           ),
           OptionsContainer(
+            id: 2,
+            type: 1,
             icon: "assets/svg/undo.svg",
             text: "undo",
             ontapFunc: _onUndoTap,
           ),
           OptionsContainer(
+            id: 3,
+            type: 1,
             icon: "assets/svg/redo.svg",
             text: "redo",
             ontapFunc: _onRedoTap,
@@ -41,67 +49,107 @@ class CellOptions extends StatelessWidget {
     );
   }
 
-  _onPenciTap() {
+  _onPenciTap(bool isActive) {
     print("pencil tapped");
-    int c = 1 + 1;
+    sudokuController.pencilSelected = isActive;
+    if (isActive) {
+      sudokuController.eraserSelected = false;
+    }
+    sudokuController.update();
+
+    print("pencilSelected ${sudokuController.pencilSelected}");
   }
 
-  _onUndoTap() {
+  _onUndoTap(bool isActive) {
     print("undo tapped");
     sudokuController.undo();
-    int c = 1 + 1;
   }
 
-  _onRedoTap() {
+  _onRedoTap(bool isActive) {
     print("redo tapped");
     sudokuController.redo();
-    int c = 1 + 1;
   }
 
-  _onEraserTap() {
+  _onEraserTap(bool isActive) {
     print("eraser tapped");
-    int c = 1 + 1;
+    sudokuController.eraserSelected = isActive;
+    if (isActive) {
+      sudokuController.pencilSelected = false;
+    }
+    sudokuController.update();
+    print("eraser ${sudokuController.eraserSelected}");
   }
 }
 
-class OptionsContainer extends StatelessWidget {
+class OptionsContainer extends StatefulWidget {
   const OptionsContainer({
     Key? key,
     required this.icon,
     required this.text,
     required this.ontapFunc,
+    required this.type,
+    required this.id,
   }) : super(key: key);
   final String icon;
+  final int id;
   final String text;
-  final VoidCallback ontapFunc;
+  final Function(bool) ontapFunc;
+  final int type;
+  @override
+  State<OptionsContainer> createState() => _OptionsContainerState();
+}
+
+class _OptionsContainerState extends State<OptionsContainer> {
+  SudokuController sudokuController = Get.find<SudokuController>();
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: ontapFunc,
-      child: Container(
-        height: 65,
-        width: 70,
-        decoration: BoxDecoration(
-            border: Border.all(
-                width: 2, color: SudokuPageColors.optionsContainerColor),
-            borderRadius: BorderRadius.circular(defaultPadding)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SvgPicture.asset(
-              icon,
-              height: 28.sp,
-              color: SudokuPageColors.optionsContainerColor,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                  fontSize: 10.sp,
-                  color: SudokuPageColors.optionsContainerColor),
-            )
-          ],
+    bool isActive = false;
+
+    return GetBuilder<SudokuController>(builder: (context) {
+      isActive = widget.id == 0 && sudokuController.pencilSelected ||
+          widget.id == 1 && sudokuController.eraserSelected;
+
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            isActive = !isActive;
+            widget.ontapFunc(isActive);
+            print("isActive $isActive");
+          });
+        },
+        child: Container(
+          height: 65,
+          width: 70,
+          decoration: BoxDecoration(
+              border: Border.all(
+                  width: isActive && widget.type == 0 ? 3 : 2,
+                  color: isActive && widget.type == 0
+                      ? CommonPageColors.primaryBlue
+                      : SudokuPageColors.optionsContainerColor),
+              borderRadius: BorderRadius.circular(defaultPadding)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SvgPicture.asset(
+                widget.icon,
+                height: 26.sp,
+                color: isActive && widget.type == 0
+                    ? CommonPageColors.primaryBlue
+                    : SudokuPageColors.optionsContainerColor,
+              ),
+              Text(
+                widget.text,
+                style: TextStyle(
+                    decoration: TextDecoration.none,
+                    fontSize: 10.sp,
+                    color: isActive && widget.type == 0
+                        ? CommonPageColors.primaryBlue
+                        : SudokuPageColors.optionsContainerColor),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

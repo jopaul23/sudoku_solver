@@ -5,6 +5,7 @@ class SudokuController extends GetxController {
   int selectedCellRow = -1;
   int selectedCellColumn = -1;
   int blockBaseX = -1, blockBaseY = -1, blockLimitX = -1, blockLimitY = -1;
+
   List<List<int>> sudokuList = [
     [0, 0, 1, 0, 0, 0, 5, 0, 0],
     [0, 2, 0, 0, 0, 0, 0, 0, 0],
@@ -17,7 +18,17 @@ class SudokuController extends GetxController {
     [8, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
   List<List<List<int>>> pencilList = [
-    [[], [], [], [], [], [], [], [], []],
+    [
+      [],
+      [1, 2, 3, 8, 5],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
     [[], [], [], [], [], [], [], [], []],
     [[], [], [], [], [], [], [], [], []],
     [[], [], [], [], [], [], [], [], []],
@@ -53,26 +64,58 @@ class SudokuController extends GetxController {
   }
 
   undo() {
-    List<int> lastUpdated = changeStack[top];
-    --top < 0 ? top = 0 : top = top;
-    print("top $top");
-    List<int> previousUpdate = changeStack[top];
-    sudokuList[lastUpdated[0]][lastUpdated[1]] = lastUpdated[2];
-    selectedCellRow = previousUpdate[0];
-    selectedCellColumn = previousUpdate[1];
-    updateSelectedCell(selectedCellRow, selectedCellColumn);
+    if (top >= 0) {
+      List<int> lastUpdated = changeStack[top];
+      --top < 0 ? top = 0 : top = top;
+      print("top $top");
+      List<int> previousUpdate = changeStack[top];
+      sudokuList[lastUpdated[0]][lastUpdated[1]] = lastUpdated[2];
+      selectedCellRow = previousUpdate[0];
+      selectedCellColumn = previousUpdate[1];
+      updateSelectedCell(selectedCellRow, selectedCellColumn);
+    }
+
     update();
   }
 
   redo() {
-    ++top >= changeStack.length ? top = changeStack.length - 1 : top = top;
-    List<int> recentRedo = changeStack[top];
-    sudokuList[recentRedo[0]][recentRedo[1]] = recentRedo[3];
-    selectedCellRow = recentRedo[0];
-    selectedCellColumn = recentRedo[1];
-    updateSelectedCell(selectedCellRow, selectedCellColumn);
+    if (top >= 0) {
+      ++top >= changeStack.length ? top = changeStack.length - 1 : top = top;
+      List<int> recentRedo = changeStack[top];
+      sudokuList[recentRedo[0]][recentRedo[1]] = recentRedo[3];
+      selectedCellRow = recentRedo[0];
+      selectedCellColumn = recentRedo[1];
+      updateSelectedCell(selectedCellRow, selectedCellColumn);
+    }
+
     update();
   }
+
+  bool pencilSelected = false;
+  pencilWrite(int n) {
+    List<int> pencilListOfCell =
+        pencilList[selectedCellRow][selectedCellColumn];
+    pencilListOfCell.addIf(!pencilListOfCell.contains(n), n);
+    print("pencilList $pencilList");
+    update();
+  }
+
+  bool eraserSelected = false;
+  eraserWrite(int n) {
+    pencilList[selectedCellRow][selectedCellColumn].remove(n);
+    update();
+  }
+
+  // swapActiveButton() {
+  //   if (pencilSelected) {
+  //     pencilSelected = false;
+  //     eraserSelected = true;
+  //   } else if (eraserSelected) {
+  //     eraserSelected = false;
+  //     pencilSelected = true;
+  //   }
+  //   update();
+  // }
 
   defineBorderRadius(int i, int j) {
     if (i == 0 && j == 0) {

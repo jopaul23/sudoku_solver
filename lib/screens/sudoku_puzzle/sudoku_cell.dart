@@ -25,6 +25,10 @@ class _SudokuCellState extends State<SudokuCell> {
   Color cellColor = Colors.transparent;
 
   Widget build(BuildContext context) {
+    double cellHeight =
+        (MediaQuery.of(context).size.width - defaultPadding * 2 - 4.4) / 9;
+    double cellWidth =
+        (MediaQuery.of(context).size.width - defaultPadding * 2 - 4.4) / 9;
     int number =
         sudokuController.sudokuList[widget.rowNumber][widget.columNumber];
     _defineBorderRadius();
@@ -41,40 +45,72 @@ class _SudokuCellState extends State<SudokuCell> {
         });
       },
       child: Container(
-        alignment: Alignment.center,
-        height:
-            (MediaQuery.of(context).size.width - defaultPadding * 2 - 4.4) / 9,
-        width:
-            (MediaQuery.of(context).size.width - defaultPadding * 2 - 4.4) / 9,
-        decoration: BoxDecoration(
-            color: cellColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(topLeft),
-              topRight: Radius.circular(topRight),
-              bottomLeft: Radius.circular(bottomLeft),
-              bottomRight: Radius.circular(bottomRight),
-            ),
-            border: Border.all(
-              width: widget.rowNumber == sudokuController.selectedCellRow &&
-                      widget.columNumber == sudokuController.selectedCellColumn
-                  ? 2
-                  : borderWidth,
-              color: widget.rowNumber == sudokuController.selectedCellRow &&
-                      widget.columNumber == sudokuController.selectedCellColumn
-                  ? ToastColors.toastYellow.withOpacity(.8)
-                  : SudokuPageColors.sudokuLineColor,
-            )),
-        child: Text(
-          number == 0 ? "0" : number.toString(),
-          style: TextStyle(
-              color: widget.rowNumber == sudokuController.selectedCellRow &&
-                      widget.columNumber == sudokuController.selectedCellColumn
-                  ? CommonPageColors.primaryBlue
-                  : SudokuPageColors.sudokuLineColor,
-              fontSize: 14.sp,
-              decoration: TextDecoration.none),
-        ),
-      ),
+          alignment: Alignment.center,
+          height: cellHeight,
+          width: cellWidth,
+          decoration: BoxDecoration(
+              color: cellColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(topLeft),
+                topRight: Radius.circular(topRight),
+                bottomLeft: Radius.circular(bottomLeft),
+                bottomRight: Radius.circular(bottomRight),
+              ),
+              border: Border.all(
+                width: widget.rowNumber == sudokuController.selectedCellRow &&
+                        widget.columNumber ==
+                            sudokuController.selectedCellColumn
+                    ? 2
+                    : borderWidth,
+                color: widget.rowNumber == sudokuController.selectedCellRow &&
+                        widget.columNumber ==
+                            sudokuController.selectedCellColumn
+                    ? ToastColors.toastYellow.withOpacity(.8)
+                    : SudokuPageColors.sudokuLineColor,
+              )),
+          child: sudokuController.sudokuList[widget.rowNumber]
+                      [widget.columNumber] !=
+                  0
+              ? Text(
+                  number.toString(),
+                  style: TextStyle(
+                      color: widget.rowNumber ==
+                                  sudokuController.selectedCellRow &&
+                              widget.columNumber ==
+                                  sudokuController.selectedCellColumn
+                          ? CommonPageColors.primaryBlue
+                          : SudokuPageColors.sudokuLineColor,
+                      fontSize: 14.sp,
+                      decoration: TextDecoration.none),
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    for (int i = 0; i < 3; i++)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (int j = 0; j < 3; j++)
+                            Container(
+                              height: cellHeight / 3 - 3,
+                              width: cellWidth / 3 - 3,
+                              alignment: Alignment.center,
+                              child: Text(
+                                sudokuController.pencilList[widget.rowNumber]
+                                            [widget.columNumber]
+                                        .contains(i * 3 + j + 1)
+                                    ? (i * 3 + j + 1).toString()
+                                    : "",
+                                style: TextStyle(
+                                    fontSize: 9.sp,
+                                    decoration: TextDecoration.none,
+                                    color: SudokuPageColors.sudokuLineColor),
+                              ),
+                            )
+                        ],
+                      )
+                  ],
+                )),
     );
   }
 
