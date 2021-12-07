@@ -1,3 +1,4 @@
+import 'package:tuple/tuple.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -17,18 +18,31 @@ class SudokuController extends GetxController {
     [0, 0, 7, 0, 0, 0, 0, 0, 0],
     [8, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
+
+  //  List<List<int>> sudokuSolutionList = [
+  //   [8, 7, 1, 9, 4, 5, 5, 0, 0],
+  //   [0, 2, 0, 0, 0, 0, 6, 0, 0],
+  //   [0, 0, 0, 4, 0, 0, 0, 0, 0],
+  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //   [0, 0, 0, 0, 0, 0, 0, 0, 6],
+  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  //   [0, 0, 7, 0, 0, 0, 0, 0, 0],
+  //   [8, 0, 0, 0, 0, 0, 0, 0, 0]
+  // ];
+  List<Tuple2<int, int>> fixedCells = [];
+  mapToFixedCells() {
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
+        if (sudokuList[i][j] != 0) {
+          fixedCells.add(Tuple2(i, j));
+        }
+      }
+    }
+  }
+
   List<List<List<int>>> pencilList = [
-    [
-      [],
-      [1, 2, 3, 8, 5],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
-    ],
+    [[], [], [], [], [], [], [], [], []],
     [[], [], [], [], [], [], [], [], []],
     [[], [], [], [], [], [], [], [], []],
     [[], [], [], [], [], [], [], [], []],
@@ -44,11 +58,26 @@ class SudokuController extends GetxController {
   updateSelectedCell(int rowNum, int columnNum) {
     selectedCellRow = rowNum;
     selectedCellColumn = columnNum;
+    if (isFixed()) {
+      eraserSelected = false;
+      pencilSelected = false;
+    }
     blockDefiner();
     update();
   }
 
+  bool isFixed() {
+    if (fixedCells.contains(Tuple2(selectedCellRow, selectedCellColumn))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   changeCellValue(int value) {
+    if (isFixed()) {
+      return 0;
+    }
     top++;
     changeStack.removeRange(top, changeStack.length);
     changeStack.add([
@@ -60,6 +89,7 @@ class SudokuController extends GetxController {
 
     sudokuList[selectedCellRow][selectedCellColumn] = value;
     update();
+    return 1;
     // print(sudokuList);
   }
 
@@ -152,5 +182,9 @@ class SudokuController extends GetxController {
       blockBaseY = 6;
       blockLimitY = 8;
     }
+  }
+
+  SudokuController() {
+    mapToFixedCells();
   }
 }

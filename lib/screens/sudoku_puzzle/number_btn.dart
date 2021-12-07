@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
+import 'package:sudoku/widgets/toast.dart';
 
 class NumberButton extends StatelessWidget {
   const NumberButton({
@@ -22,7 +23,18 @@ class NumberButton extends StatelessWidget {
           } else if (sudokuController.eraserSelected) {
             sudokuController.eraserWrite(i);
           } else {
-            sudokuController.changeCellValue(i);
+            int status = sudokuController.changeCellValue(i);
+            if (status == 0) {
+              late OverlayEntry toastOverlay;
+              toastOverlay = OverlayEntry(
+                builder: (context) => Toast(
+                    title: "Invalid operation",
+                    description: "can't update this cell",
+                    icon: "assets/svg/warning.svg",
+                    overlayEntry: toastOverlay),
+              );
+              Overlay.of(context)?.insert(toastOverlay);
+            }
           }
 
           print(

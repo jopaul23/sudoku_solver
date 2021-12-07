@@ -26,70 +26,72 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CommonPageColors.bgColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: defaultPadding, vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 30),
-            Text(
-              "Please Enter Your Beautiful Name",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: HomePageColors.profileNameColor,
-                  fontSize: 18.sp),
-            ),
-            const SizedBox(height: defaultPadding * 3),
-            TextField(
-              controller: _textEditingController,
-              maxLength: 15,
-              style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                  color: SudokuPageColors.sudokuLineColor),
-              decoration: InputDecoration(
-                  counterStyle: TextStyle(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: CommonPageColors.bgColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: defaultPadding, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 30),
+              Text(
+                "Please Enter Your Beautiful Name",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: HomePageColors.profileNameColor,
+                    fontSize: 18.sp),
+              ),
+              const SizedBox(height: defaultPadding * 3),
+              TextField(
+                controller: _textEditingController,
+                maxLength: 15,
+                style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
-                    color: SudokuPageColors.sudokuLineColor,
-                  ),
-                  hintText: "Nickname",
-                  hintStyle: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                    color: SudokuPageColors.sudokuLineColor,
-                  ),
-                  border: _border(),
-                  focusedBorder: _border(),
-                  enabledBorder: _border()),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () => _onContinue(context),
-              child: Container(
-                height: 60,
-                width: 170,
-                decoration: BoxDecoration(
-                    color: CommonPageColors.primaryBlue,
-                    borderRadius: BorderRadius.circular(40)),
-                alignment: Alignment.center,
-                child: const Text(
-                  "continue",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
+                    color: SudokuPageColors.sudokuLineColor),
+                decoration: InputDecoration(
+                    counterStyle: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                      color: SudokuPageColors.sudokuLineColor,
+                    ),
+                    hintText: "Nickname",
+                    hintStyle: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                      color: SudokuPageColors.sudokuLineColor,
+                    ),
+                    border: _border(),
+                    focusedBorder: _border(),
+                    enabledBorder: _border()),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => _onContinue(context),
+                child: Container(
+                  height: 60,
+                  width: 170,
+                  decoration: BoxDecoration(
+                      color: CommonPageColors.primaryBlue,
+                      borderRadius: BorderRadius.circular(40)),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "continue",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-          ],
+              const SizedBox(
+                height: 40,
+              ),
+            ],
+          ),
         ),
       ),
     );

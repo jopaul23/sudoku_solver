@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/sudoku_cell.dart';
+import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_cell.dart';
 
 class SudokuTable extends StatelessWidget {
   const SudokuTable({

@@ -39,6 +39,8 @@ dependencies:
   flutter_screenutil: ^5.0.1
   get: ^4.5.0
   shared_preferences: ^2.0.9
+  tuple: ^2.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
