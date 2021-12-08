@@ -9,6 +9,7 @@ class SudokuController extends GetxController {
   String level = "medium";
   int mistakes = 0;
   bool isPaused = false;
+  bool isMistake = false;
 
   List<List<int>> sudokuList = [
     [0, 0, 1, 0, 0, 0, 5, 0, 0],
@@ -22,17 +23,27 @@ class SudokuController extends GetxController {
     [8, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
 
-  //  List<List<int>> sudokuSolutionList = [
-  //   [8, 7, 1, 9, 4, 5, 5, 0, 0],
-  //   [0, 2, 0, 0, 0, 0, 6, 0, 0],
-  //   [0, 0, 0, 4, 0, 0, 0, 0, 0],
-  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //   [0, 0, 0, 0, 0, 0, 0, 0, 6],
-  //   [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  //   [0, 0, 7, 0, 0, 0, 0, 0, 0],
-  //   [8, 0, 0, 0, 0, 0, 0, 0, 0]
-  // ];
+  List<List<int>> sudokuSolutionList = [
+    [8, 7, 1, 9, 4, 5, 5, 3, 4],
+    [5, 2, 6, 1, 2, 3, 6, 2, 1],
+    [2, 3, 0, 4, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 6],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 7, 0, 0, 0, 0, 0, 0],
+    [8, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+
+  bool checkCorrect(int n) {
+    if (sudokuSolutionList[selectedCellRow][selectedCellColumn] == n) {
+      return true;
+    }
+    mistakes += 1;
+    isMistake = true;
+    return false;
+  }
+
   List<Tuple2<int, int>> fixedCells = [];
   mapToFixedCells() {
     for (int i = 0; i < 9; i++) {
@@ -59,12 +70,14 @@ class SudokuController extends GetxController {
   int top = -1;
 
   updateSelectedCell(int rowNum, int columnNum) {
+    isMistake = false;
     selectedCellRow = rowNum;
     selectedCellColumn = columnNum;
     if (isFixed()) {
       eraserSelected = false;
       pencilSelected = false;
     }
+
     blockDefiner();
     update();
   }
@@ -78,8 +91,9 @@ class SudokuController extends GetxController {
   }
 
   changeCellValue(int value) {
+    int status = 0; //0-fixed cell, 1-correct, 2-wrong
     if (isFixed()) {
-      return 0;
+      return status;
     }
     top++;
     changeStack.removeRange(top, changeStack.length);
@@ -91,8 +105,11 @@ class SudokuController extends GetxController {
     ]);
 
     sudokuList[selectedCellRow][selectedCellColumn] = value;
+
+    checkCorrect(value) ? status = 2 : status = 1;
     update();
-    return 1;
+
+    return status;
     // print(sudokuList);
   }
 
@@ -138,17 +155,6 @@ class SudokuController extends GetxController {
     pencilList[selectedCellRow][selectedCellColumn].remove(n);
     update();
   }
-
-  // swapActiveButton() {
-  //   if (pencilSelected) {
-  //     pencilSelected = false;
-  //     eraserSelected = true;
-  //   } else if (eraserSelected) {
-  //     eraserSelected = false;
-  //     pencilSelected = true;
-  //   }
-  //   update();
-  // }
 
   defineBorderRadius(int i, int j) {
     if (i == 0 && j == 0) {

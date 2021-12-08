@@ -7,11 +7,13 @@ import 'package:sudoku/constants/constants.dart';
 class Toast extends StatefulWidget {
   const Toast(
       {Key? key,
+      this.color = const Color(0xFFE7A519),
       required this.title,
       required this.description,
       required this.icon,
       required this.overlayEntry})
       : super(key: key);
+  final Color? color;
   final String icon;
   final String title, description;
   final OverlayEntry overlayEntry;
@@ -58,7 +60,7 @@ class _ToastState extends State<Toast> with SingleTickerProviderStateMixin {
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             height: 50,
             width: MediaQuery.of(context).size.width,
-            color: ToastColors.toastYellow,
+            color: widget.color,
             alignment: Alignment.center,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

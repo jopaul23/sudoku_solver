@@ -65,7 +65,9 @@ class _SudokuCellState extends State<SudokuCell> {
                 color: widget.rowNumber == sudokuController.selectedCellRow &&
                         widget.columNumber ==
                             sudokuController.selectedCellColumn
-                    ? ToastColors.toastYellow.withOpacity(.8)
+                    ? sudokuController.isMistake
+                        ? SudokuPageColors.red
+                        : ToastColors.toastYellow.withOpacity(.8)
                     : SudokuPageColors.sudokuLineColor,
               )),
           child: sudokuController.sudokuList[widget.rowNumber]
@@ -153,7 +155,11 @@ class _SudokuCellState extends State<SudokuCell> {
     } else if (conditionCount == 2) {
       cellColor = CommonPageColors.primaryBlue.withOpacity(0.25);
     } else if (conditionCount == 3) {
-      cellColor = Colors.yellow.withOpacity(0.25);
+      if (sudokuController.isMistake) {
+        cellColor = SudokuPageColors.red.withOpacity(0.25);
+      } else {
+        cellColor = Colors.yellow.withOpacity(0.25);
+      }
     }
   }
 }
