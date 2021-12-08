@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +17,7 @@ class PuzzlePageLayout extends StatefulWidget {
 }
 
 class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
+  bool isPaused = false;
   @override
   Widget build(BuildContext context) {
     SudokuController sudokuController = Get.put(SudokuController());
@@ -29,23 +28,6 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
           color: CommonPageColors.bgColor,
           child: Column(
             children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    "assets/svg/exit.svg",
-                    height: 30.sp,
-                  ),
-                  const Spacer(),
-                  SvgPicture.asset(
-                    "assets/svg/pause.svg",
-                    height: 30.sp,
-                    color: SudokuPageColors.sudokuLineColor,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
               const TopBar(),
               const SizedBox(
                 height: 30,

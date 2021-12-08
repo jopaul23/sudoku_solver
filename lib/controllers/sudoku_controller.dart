@@ -6,6 +6,9 @@ class SudokuController extends GetxController {
   int selectedCellRow = -1;
   int selectedCellColumn = -1;
   int blockBaseX = -1, blockBaseY = -1, blockLimitX = -1, blockLimitY = -1;
+  String level = "medium";
+  int mistakes = 0;
+  bool isPaused = false;
 
   List<List<int>> sudokuList = [
     [0, 0, 1, 0, 0, 0, 5, 0, 0],
