@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sudoku/screens/home_page/home_page_layout.dart';
 import 'package:sudoku/screens/sudoku_puzzle/puzzle_page_layout.dart';
 
 void main() {
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               fontFamily: GoogleFonts.poppins(fontSize: 14.sp).fontFamily,
             ),
-            home: PuzzlePageLayout()));
+            home: HomePageLayout()));
   }
 }
