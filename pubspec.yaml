@@ -37,7 +37,11 @@ dependencies:
   flutter_svg: ^0.23.0+1
   google_fonts: ^2.1.0
   flutter_screenutil: ^5.0.1
-
+  get: ^4.5.0
+  shared_preferences: ^2.0.9
+  tuple: ^2.0.0
+  pausable_timer: ^1.0.0+2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

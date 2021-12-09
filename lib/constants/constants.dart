@@ -1,9 +1,15 @@
 import 'dart:ui';
 
+const double defaultPadding = 16.0;
+
 // common
 class CommonPageColors {
   static final Color bgColor = Color(0xffF4F6FD);
   static final Color primaryBlue = Color(0xff076AFF);
+}
+
+class ToastColors {
+  static final toastYellow = Color(0xFFE7A519);
 }
 
 //home page
