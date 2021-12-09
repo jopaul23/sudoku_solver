@@ -1,6 +1,9 @@
+import 'package:sudoku/controllers/solution.dart';
+import 'package:sudoku/dataBase/sudokus.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'dart:math';
 
 class SudokuController extends GetxController {
   int selectedCellRow = -1;
@@ -24,16 +27,41 @@ class SudokuController extends GetxController {
   ];
 
   List<List<int>> sudokuSolutionList = [
-    [8, 7, 1, 9, 4, 5, 5, 3, 4],
-    [5, 2, 6, 1, 2, 3, 6, 2, 1],
-    [2, 3, 0, 4, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 6],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 7, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [8, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
+
+  getSudoku(int levelId) {
+    late int index;
+    if (levelId == 0) {
+      index = Random().nextInt(easy.length);
+      level = "easy";
+    } else if (levelId == 1) {
+      index = Random().nextInt(hard.length);
+      level = "hard";
+    } else if (levelId == 2) {
+      index = Random().nextInt(evil.length);
+      level = "hard";
+    }
+    String sudokuString = easy[index];
+    sudokuString = sudokuString.replaceAll('.', '0');
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 9; j++) {
+        sudokuList[i][j] = int.parse(sudokuString[i * 9 + j]);
+      }
+    }
+    mapToFixedCells();
+    sudokuSolutionList = mainSection(sudokuList);
+    print(
+        "index $index \nSudokuString $sudokuString\nsolutionList $sudokuSolutionList");
+  }
 
   bool checkCorrect(int n) {
     if (sudokuSolutionList[selectedCellRow][selectedCellColumn] == n) {
@@ -191,9 +219,5 @@ class SudokuController extends GetxController {
       blockBaseY = 6;
       blockLimitY = 8;
     }
-  }
-
-  SudokuController() {
-    mapToFixedCells();
   }
 }

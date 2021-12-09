@@ -4,17 +4,30 @@ import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
 import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_cell.dart';
 
-class SudokuTable extends StatelessWidget {
+class SudokuTable extends StatefulWidget {
   const SudokuTable({
     Key? key,
     // required this.sudokuController,
   }) : super(key: key);
-  // final SudokuController sudokuController;
+
+  @override
+  State<SudokuTable> createState() => _SudokuTableState();
+}
+
+class _SudokuTableState extends State<SudokuTable> {
+  SudokuController sudokuController = Get.find<SudokuController>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    sudokuController.getSudoku(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     double topLeft = 0, bottomLeft = 0, topRight = 0, bottomRight = 0;
 
-    SudokuController sudokuController = Get.find<SudokuController>();
     return Container(
       width: MediaQuery.of(context).size.width - defaultPadding * 2,
       height: MediaQuery.of(context).size.width - defaultPadding * 2,

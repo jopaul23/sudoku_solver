@@ -43,9 +43,12 @@ class _TopBarState extends State<TopBar> {
         children: [
           Row(
             children: [
-              SvgPicture.asset(
-                "assets/svg/exit.svg",
-                height: 30.sp,
+              GestureDetector(
+                onTap: () {},
+                child: SvgPicture.asset(
+                  "assets/svg/exit.svg",
+                  height: 30.sp,
+                ),
               ),
               const Spacer(),
               GestureDetector(
