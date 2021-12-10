@@ -5,7 +5,7 @@ A flutter app to play and solve sudoku
 ## Images
 
 Home page
-![Screenshot_1639149130](https://user-images.githubusercontent.com/60638127/145598081-4df124e6-81ea-419a-b7b7-a5f1cff20d2d.png)
+![Screenshot_1639149130](https://user-images.githubusercontent.com/60638127/145598081-4df124e6-81ea-419a-b7b7-a5f1cff20d2d.png 300x200)
 
 solver page
 ![Screenshot_1639149245](https://user-images.githubusercontent.com/60638127/145598267-aa1b58e4-efbf-48bd-9ccd-085adbb24138.png)
