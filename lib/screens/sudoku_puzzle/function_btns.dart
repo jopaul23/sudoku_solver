@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/functioButton/options_container.dart';
+import 'package:sudoku/widgets/options_container.dart';
 import 'package:sudoku/widgets/toast.dart';
 
 class CellOptions extends StatelessWidget {

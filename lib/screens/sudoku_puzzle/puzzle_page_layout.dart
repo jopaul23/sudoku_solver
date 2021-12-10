@@ -4,10 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/functioButton/function_btns.dart';
+import 'package:sudoku/screens/sudoku_puzzle/function_btns.dart';
 import 'package:sudoku/screens/sudoku_puzzle/number_btn.dart';
-import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_table.dart';
 import 'package:sudoku/screens/sudoku_puzzle/top_bar.dart';
+import 'package:sudoku/widgets/table/sudoku_table.dart';
 
 class PuzzlePageLayout extends StatefulWidget {
   const PuzzlePageLayout({Key? key, required this.level}) : super(key: key);

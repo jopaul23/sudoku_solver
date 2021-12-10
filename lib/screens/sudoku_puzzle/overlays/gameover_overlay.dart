@@ -58,7 +58,7 @@ class _GameOverPageState extends State<GameOverPage>
             ),
             child: Center(
               child: Material(
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     widget.gameoverOverlay.remove();
                     Get.delete<SudokuController>();

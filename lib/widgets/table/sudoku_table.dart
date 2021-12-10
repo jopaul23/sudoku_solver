@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
+import 'package:sudoku/controllers/common_functions.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_cell.dart';
+import 'package:sudoku/widgets/table/sudoku_cell.dart';
 
 class SudokuTable extends StatefulWidget {
   const SudokuTable({
     Key? key,
-    required this.level,
+    this.level,
     // required this.sudokuController,
   }) : super(key: key);
-  final int level;
+  final int? level;
   @override
   State<SudokuTable> createState() => _SudokuTableState();
 }
@@ -22,7 +23,9 @@ class _SudokuTableState extends State<SudokuTable> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    sudokuController.getSudoku(widget.level);
+    if (widget.level != null) {
+      sudokuController.getSudoku(widget.level!);
+    }
   }
 
   @override
@@ -45,7 +48,7 @@ class _SudokuTableState extends State<SudokuTable> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(width: .4),
-                      borderRadius: sudokuController.defineBorderRadius(i, j),
+                      borderRadius: CommonFunctions.defineBorderRadius(i, j),
                     ),
                     child: Column(
                       children: [

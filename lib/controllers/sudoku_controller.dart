@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'dart:math';
 
 class SudokuController extends GetxController {
+  bool isSolver = true;
   int selectedCellRow = -1;
   int selectedCellColumn = -1;
   int blockBaseX = -1, blockBaseY = -1, blockLimitX = -1, blockLimitY = -1;
@@ -16,15 +17,15 @@ class SudokuController extends GetxController {
   int toBeCorrected = 81;
 
   List<List<int>> sudokuList = [
-    [0, 0, 1, 0, 0, 0, 5, 0, 0],
-    [0, 2, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 4, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 6],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 7, 0, 0, 0, 0, 0, 0],
-    [8, 0, 0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
 
   List<List<int>> sudokuSolutionList = [
@@ -40,6 +41,7 @@ class SudokuController extends GetxController {
   ];
 
   getSudoku(int levelId) {
+    isSolver = false;
     late int index;
     if (levelId == 0) {
       index = Random().nextInt(easy.length);
@@ -135,16 +137,20 @@ class SudokuController extends GetxController {
     ]);
 
     sudokuList[selectedCellRow][selectedCellColumn] = value;
-
-    if (checkCorrect(value)) {
+    if (isSolver) {
       status = 2;
-      toBeCorrected -= 1;
     } else {
-      status = 1;
+      if (checkCorrect(value)) {
+        status = 2;
+        toBeCorrected -= 1;
+      } else {
+        status = 1;
+      }
+      if (toBeCorrected == 0) {
+        status = 3;
+      }
     }
-    if (toBeCorrected == 0) {
-      status = 3;
-    }
+
     update();
 
     return status;
@@ -188,23 +194,22 @@ class SudokuController extends GetxController {
   }
 
   bool eraserSelected = false;
-  eraserWrite(int n) {
-    pencilList[selectedCellRow][selectedCellColumn].remove(n);
-    update();
-  }
 
-  defineBorderRadius(int i, int j) {
-    if (i == 0 && j == 0) {
-      return const BorderRadius.only(topLeft: Radius.circular(5));
-    } else if (i == 2 && j == 2) {
-      return const BorderRadius.only(bottomLeft: Radius.circular(5));
-    } else if (i == 0 && j == 2) {
-      return const BorderRadius.only(topRight: Radius.circular(5));
-    } else if (i == 2 && j == 0) {
-      return const BorderRadius.only(bottomRight: Radius.circular(5));
+  eraserWrite(int n) {
+    if (isSolver) {
+      sudokuList[selectedCellRow][selectedCellColumn] = 0;
+      top++;
+      changeStack.removeRange(top, changeStack.length);
+      changeStack.add([
+        selectedCellRow,
+        selectedCellColumn,
+        sudokuList[selectedCellRow][selectedCellColumn],
+        0
+      ]);
     } else {
-      return BorderRadius.zero;
+      pencilList[selectedCellRow][selectedCellColumn].remove(n);
     }
+    update();
   }
 
   blockDefiner() {
@@ -228,5 +233,10 @@ class SudokuController extends GetxController {
       blockBaseY = 6;
       blockLimitY = 8;
     }
+  }
+
+  solve() {
+    sudokuList = mainSection(sudokuList);
+    update();
   }
 }

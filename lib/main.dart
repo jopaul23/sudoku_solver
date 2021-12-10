@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sudoku/screens/home_page/home_page_layout.dart';
 import 'package:sudoku/screens/sudoku_puzzle/puzzle_page_layout.dart';
+import 'package:sudoku/screens/sudoku_solve/solve_page_layout.dart';
 import 'package:sudoku/screens/welcome_page/welcome_page_layout.dart';
 
 void main() {
