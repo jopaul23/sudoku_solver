@@ -1,3 +1,4 @@
+designed and developed by jopaul,naigal and joyal
 # sudoku
 
 A flutter app to play and solve sudoku
