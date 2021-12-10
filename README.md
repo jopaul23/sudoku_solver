@@ -5,11 +5,11 @@ A flutter app to play and solve sudoku
 ## Images
 
 Home page
-![home](https://user-images.githubusercontent.com/60638127/145598786-f2a6b7a8-0c23-4e1c-94aa-5bae75035673.png)
+![home](https://user-images.githubusercontent.com/60638127/145598786-f2a6b7a8-0c23-4e1c-94aa-5bae75035673.png | width=100)
 
 solver page
-![Screenshot_1639149245](https://user-images.githubusercontent.com/60638127/145598267-aa1b58e4-efbf-48bd-9ccd-085adbb24138.png)
-![Screenshot_1639149250](https://user-images.githubusercontent.com/60638127/145598277-6d827d22-3b47-44a0-a84e-531c1a5b9203.png)
+![Screenshot_1639149245](https://user-images.githubusercontent.com/60638127/145598267-aa1b58e4-efbf-48bd-9ccd-085adbb24138.png| width=100)
+![Screenshot_1639149250](https://user-images.githubusercontent.com/60638127/145598277-6d827d22-3b47-44a0-a84e-531c1a5b9203.png| width=100)
 
 puzzle page
 ![Screenshot_1639149139](https://user-images.githubusercontent.com/60638127/145598110-1c3d8b3c-ef5a-4ed8-8e1d-3ed1d9b2b940.png)
