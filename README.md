@@ -9,6 +9,7 @@ A flutter app to play and solve sudoku
 <img src="https://user-images.githubusercontent.com/60638127/145600205-0fd140c4-0ef7-4f97-9145-305550666037.png" width="200" height="400" />
 
 <h3>solver page</h3>
+<h4>you can enter the sudoku here and thet will be solved by our app automatically</h4>
 <img src="https://user-images.githubusercontent.com/60638127/145598267-aa1b58e4-efbf-48bd-9ccd-085adbb24138.png" width="200" height="400" />
 <img src="https://user-images.githubusercontent.com/60638127/145598277-6d827d22-3b47-44a0-a84e-531c1a5b9203.png" width="200" height="400" />
 
