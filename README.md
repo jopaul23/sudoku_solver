@@ -1,6 +1,6 @@
 # sudoku
 
-A new Flutter project.
+A flutter app to play and solve sudoku
 
 ## Getting Started
 
