@@ -15,23 +15,15 @@ class HomePageLayout extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: <Widget>[
+          alignment: Alignment.center,
+          children: [
             SvgPicture.asset(
               'assets/svg/homeBg.svg',
               fit: BoxFit.fill,
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
             ),
-            Container(
-              padding: const EdgeInsets.only(
-                  top: 60, left: 30, right: 30, bottom: 7),
-              child: Column(
-                children: [
-                  UserCard(user: 'Player'),
-                  const BottomCard(),
-                ],
-              ),
-            ),
+            BottomCard()
           ],
         ),
       ),

@@ -9,33 +9,27 @@ class BottomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(bottom: 75, top: 25),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: HomePageColors.cardColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 10,
-                )
-              ]),
-          child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              children: const [
-                SizedBox(height: 30, width: 20),
-                Solver(),
-                SizedBox(height: 30, width: 20),
-                NewGame(),
-                SizedBox(height: 35, width: 20),
-              ],
-            ),
-          ),
-        ),
+    return Container(
+      height: 500,
+      width: 300,
+      padding: const EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: HomePageColors.cardColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              blurRadius: 10,
+            )
+          ]),
+      child: Column(
+        children: const [
+          SizedBox(height: 30, width: 20),
+          Solver(),
+          SizedBox(height: 30, width: 20),
+          NewGame(),
+          SizedBox(height: 35, width: 20),
+        ],
       ),
     );
   }
