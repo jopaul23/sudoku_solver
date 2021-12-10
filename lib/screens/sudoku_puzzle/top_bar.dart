@@ -7,7 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/pause_page.dart';
+import 'package:sudoku/screens/sudoku_puzzle/overlays/close_overlay.dart';
+import 'package:sudoku/screens/sudoku_puzzle/overlays/pause_overlay.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({
@@ -44,7 +45,13 @@ class _TopBarState extends State<TopBar> {
           Row(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  late OverlayEntry closeOverlay;
+                  closeOverlay = OverlayEntry(
+                      builder: (context) =>
+                          CloseOverlay(closeOverlay: closeOverlay));
+                  Overlay.of(context)?.insert(closeOverlay);
+                },
                 child: SvgPicture.asset(
                   "assets/svg/exit.svg",
                   height: 30.sp,
@@ -58,7 +65,12 @@ class _TopBarState extends State<TopBar> {
                     sudokuController.isPaused
                         ? pausedTime = _now
                         : _now = pausedTime;
-                    Get.to(PauseOveerlay());
+
+                    late OverlayEntry pauseOverlay;
+                    pauseOverlay = OverlayEntry(
+                        builder: (context) =>
+                            PauseOveerlay(pauseOverlay: pauseOverlay));
+                    Overlay.of(context)?.insert(pauseOverlay);
                   });
                 },
                 child: SvgPicture.asset(

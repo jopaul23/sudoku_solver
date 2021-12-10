@@ -7,9 +7,10 @@ import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_cell.dart';
 class SudokuTable extends StatefulWidget {
   const SudokuTable({
     Key? key,
+    required this.level,
     // required this.sudokuController,
   }) : super(key: key);
-
+  final int level;
   @override
   State<SudokuTable> createState() => _SudokuTableState();
 }
@@ -21,7 +22,7 @@ class _SudokuTableState extends State<SudokuTable> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    sudokuController.getSudoku(0);
+    sudokuController.getSudoku(widget.level);
   }
 
   @override

@@ -10,8 +10,8 @@ import 'package:sudoku/screens/sudoku_puzzle/table/sudoku_table.dart';
 import 'package:sudoku/screens/sudoku_puzzle/top_bar.dart';
 
 class PuzzlePageLayout extends StatefulWidget {
-  const PuzzlePageLayout({Key? key}) : super(key: key);
-
+  const PuzzlePageLayout({Key? key, required this.level}) : super(key: key);
+  final int level;
   @override
   _PuzzlePageLayoutState createState() => _PuzzlePageLayoutState();
 }
@@ -24,7 +24,7 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(defaultPadding),
+          padding: const EdgeInsets.all(defaultPadding),
           color: CommonPageColors.bgColor,
           child: Column(
             children: [
@@ -32,7 +32,9 @@ class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
               const SizedBox(
                 height: 30,
               ),
-              const SudokuTable(),
+              SudokuTable(
+                level: widget.level,
+              ),
               const SizedBox(
                 height: 20,
               ),

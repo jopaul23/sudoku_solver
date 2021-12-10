@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sudoku/constants/constants.dart';
 
 class UserCard extends StatelessWidget {
@@ -10,29 +11,35 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 10,
-        color: HomePageColors.cardColor,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: HomePageColors.cardColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 10,
+              )
+            ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage("assets/jpeg/new.png"),
-              backgroundColor: Colors.black,
+              radius: 40.sp,
+              backgroundImage: const AssetImage("assets/jpeg/new.png"),
+              backgroundColor: HomePageColors.profileNameColor,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(user,
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 28.sp,
                       fontWeight: FontWeight.bold,
                     )),
                 Text(
                   "$complete Completed",
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: CommonPageColors.primaryBlue),
                 ),
               ],
             ),

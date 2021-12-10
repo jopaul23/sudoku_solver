@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/constants/constants.dart';
 import 'package:sudoku/controllers/sudoku_controller.dart';
-import 'package:sudoku/screens/sudoku_puzzle/gameover_page.dart';
+import 'package:sudoku/screens/sudoku_puzzle/overlays/gameover_overlay.dart';
 import 'package:sudoku/widgets/toast.dart';
 
 class NumberButton extends StatelessWidget {
@@ -49,7 +49,11 @@ class NumberButton extends StatelessWidget {
                 );
                 Overlay.of(context)?.insert(toastOverlay);
               } else if (sudokuController.mistakes == 5) {
-                Get.to(GameOverPage());
+                late OverlayEntry gameoverOverlay;
+                gameoverOverlay = OverlayEntry(
+                    builder: (context) =>
+                        GameOverPage(gameoverOverlay: gameoverOverlay));
+                Overlay.of(context)?.insert(gameoverOverlay);
               }
             }
           }

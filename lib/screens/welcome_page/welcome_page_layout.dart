@@ -107,7 +107,7 @@ class _WelcomePageState extends State<WelcomePage> {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString("name", _textEditingController.text);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PuzzlePageLayout()));
+          context, MaterialPageRoute(builder: (context) => HomePageLayout()));
     } else {
       late OverlayEntry toastOverlay;
       toastOverlay = OverlayEntry(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sudoku/constants/constants.dart';
 
 class Solver extends StatelessWidget {
   const Solver({Key? key}) : super(key: key);
@@ -11,17 +13,18 @@ class Solver extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           //Sudoku solver
-          
         },
-        child: Text("Solver"),
+        child: Text(
+          "Solver",
+          style: TextStyle(color: CommonPageColors.bgColor, fontSize: 16.sp),
+        ),
         style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(CommonPageColors.primaryBlue),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
-            
-          )
-        )
-            ),
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ))),
       ),
     );
   }
