@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97.164" height="97.164" viewBox="0 0 97.164 97.164">
+  <g id="exit" transform="translate(-936.57 -52.43)">
+    <g id="icon" transform="translate(964.684 80.543)">
+      <path id="Path_86" data-name="Path 86" d="M986.014,104.463a2.924,2.924,0,0,1-2.068-4.992l17.545-17.545a2.924,2.924,0,0,1,4.135,4.135l-17.545,17.545A2.914,2.914,0,0,1,986.014,104.463Z" transform="translate(-965.546 -81.07)" fill="#d51d1d"/>
+      <path id="Path_87" data-name="Path 87" d="M968.135,122.342a2.924,2.924,0,0,1-2.068-4.991l17.544-17.545a2.924,2.924,0,0,1,4.135,4.135L970.2,121.486A2.913,2.913,0,0,1,968.135,122.342Z" transform="translate(-965.211 -81.405)" fill="#d51d1d"/>
+      <path id="Path_88" data-name="Path 88" d="M985.679,104.463a2.916,2.916,0,0,1-2.068-.857L966.068,86.062a2.924,2.924,0,0,1,4.134-4.135l17.545,17.545a2.924,2.924,0,0,1-2.068,4.992Z" transform="translate(-965.211 -81.07)" fill="#d51d1d"/>
+      <path id="Path_89" data-name="Path 89" d="M1003.559,122.342a2.914,2.914,0,0,1-2.067-.857l-17.545-17.544a2.924,2.924,0,0,1,4.135-4.135l17.545,17.545a2.924,2.924,0,0,1-2.068,4.991Z" transform="translate(-965.546 -81.405)" fill="#d51d1d"/>
+    </g>
+    <circle id="Ellipse_11" data-name="Ellipse 11" cx="48.082" cy="48.082" r="48.082" transform="translate(937.07 52.93)" fill="none" stroke="#d51d1d" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>

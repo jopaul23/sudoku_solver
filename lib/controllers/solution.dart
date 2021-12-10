@@ -190,22 +190,10 @@ class SudokkuSolver {
   }
 }
 
-void main() {
-  List<List<int>> board = [
-    [2, 5, 0, 0, 0, 9, 0, 0, 0],
-    [6, 1, 0, 0, 0, 0, 9, 0, 0],
-    [0, 0, 4, 0, 0, 0, 0, 7, 6],
-    [0, 0, 0, 9, 6, 2, 0, 0, 0],
-    [0, 0, 9, 0, 0, 5, 3, 0, 0],
-    [5, 6, 0, 0, 7, 0, 0, 0, 0],
-    [0, 0, 0, 0, 5, 0, 0, 0, 2],
-    [7, 0, 5, 2, 0, 8, 0, 0, 0],
-    [8, 0, 0, 0, 0, 0, 7, 5, 1]
-  ];
-
+List<List<int>> mainSection(List<List<int>> board) {
   SudokkuSolver solver = SudokkuSolver.fromList(board);
   print("Sudokku Object created");
   print("Solving the puzzle");
   solver.solve();
-  print(solver.toList());
+  return solver.toList();
 }
