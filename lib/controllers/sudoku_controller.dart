@@ -13,6 +13,7 @@ class SudokuController extends GetxController {
   int mistakes = 0;
   bool isPaused = false;
   bool isMistake = false;
+  int toBeCorrected = 81;
 
   List<List<int>> sudokuList = [
     [0, 0, 1, 0, 0, 0, 5, 0, 0],
@@ -51,6 +52,7 @@ class SudokuController extends GetxController {
       level = "hard";
     }
     String sudokuString = easy[index];
+    toBeCorrected = sudokuString.split('.').length - 1;
     sudokuString = sudokuString.replaceAll('.', '0');
     for (int i = 0; i < 9; i++) {
       for (int j = 0; j < 9; j++) {
@@ -134,11 +136,18 @@ class SudokuController extends GetxController {
 
     sudokuList[selectedCellRow][selectedCellColumn] = value;
 
-    checkCorrect(value) ? status = 2 : status = 1;
+    if (checkCorrect(value)) {
+      status = 2;
+      toBeCorrected -= 1;
+    } else {
+      status = 1;
+    }
+    if (toBeCorrected == 0) {
+      status = 3;
+    }
     update();
 
     return status;
-    // print(sudokuList);
   }
 
   undo() {

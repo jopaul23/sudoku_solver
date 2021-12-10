@@ -13,7 +13,29 @@ class GameOverPage extends StatefulWidget {
   _GameOverPageState createState() => _GameOverPageState();
 }
 
-class _GameOverPageState extends State<GameOverPage> {
+class _GameOverPageState extends State<GameOverPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
+    setState(() {
+      _animationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _animationController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,35 +47,38 @@ class _GameOverPageState extends State<GameOverPage> {
           width: size.width,
           color: Colors.black.withOpacity(.3),
         ),
-        Container(
-          height: size.width / 1.3,
-          width: size.width / 1.3,
-          decoration: BoxDecoration(
-            color: CommonPageColors.bgColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Center(
-            child: Material(
-              child: GestureDetector(
-                onTap: () {
-                  widget.gameoverOverlay.remove();
-                  Get.delete<SudokuController>();
-                  Get.to(HomePageLayout());
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  alignment: Alignment.center,
-                  height: 70,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: CommonPageColors.primaryBlue,
-                      borderRadius: BorderRadius.circular(
-                        20,
-                      )),
-                  child: Text(
-                    "new game",
-                    style: TextStyle(
-                        color: CommonPageColors.bgColor, fontSize: 18.sp),
+        ScaleTransition(
+          scale: _animation,
+          child: Container(
+            height: size.width / 1.3,
+            width: size.width / 1.3,
+            decoration: BoxDecoration(
+              color: CommonPageColors.bgColor,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Center(
+              child: Material(
+                child: GestureDetector(
+                  onTap: () {
+                    widget.gameoverOverlay.remove();
+                    Get.delete<SudokuController>();
+                    Get.to(HomePageLayout());
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    alignment: Alignment.center,
+                    height: 70,
+                    width: 150,
+                    decoration: BoxDecoration(
+                        color: CommonPageColors.primaryBlue,
+                        borderRadius: BorderRadius.circular(
+                          20,
+                        )),
+                    child: Text(
+                      "new game",
+                      style: TextStyle(
+                          color: CommonPageColors.bgColor, fontSize: 18.sp),
+                    ),
                   ),
                 ),
               ),
