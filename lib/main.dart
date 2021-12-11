@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sudoku/screens/home_page/home_page_layout.dart';
-import 'package:sudoku/screens/sudoku_puzzle/puzzle_page_layout.dart';
-import 'package:sudoku/screens/sudoku_solve/solve_page_layout.dart';
-import 'package:sudoku/screens/welcome_page/welcome_page_layout.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'screens/home_page/home_page_layout.dart';
 
 void main() {
+  WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    Hive.init(dir.path);
+  });
   runApp(const MyApp());
 }
 
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(360, 690),
+        designSize: const Size(360, 690),
         builder: () => GetMaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
