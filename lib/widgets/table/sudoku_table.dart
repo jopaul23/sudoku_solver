@@ -30,8 +30,6 @@ class _SudokuTableState extends State<SudokuTable> {
 
   @override
   Widget build(BuildContext context) {
-    double topLeft = 0, bottomLeft = 0, topRight = 0, bottomRight = 0;
-
     return Container(
       width: MediaQuery.of(context).size.width - defaultPadding * 2,
       height: MediaQuery.of(context).size.width - defaultPadding * 2,

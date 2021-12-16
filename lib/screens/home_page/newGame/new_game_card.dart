@@ -11,7 +11,7 @@ class NewGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Container(
           decoration: BoxDecoration(
@@ -24,7 +24,7 @@ class NewGame extends StatelessWidget {
                 )
               ]),
           child: Container(
-            padding: EdgeInsets.only(left: 60, right: 60),
+            padding: const EdgeInsets.only(left: 60, right: 60),
             child: Column(
               children: [
                 const SizedBox(
@@ -41,7 +41,6 @@ class NewGame extends StatelessWidget {
                 LevelButton(
                   text: "easy",
                   onpressed: () {
-                    print("easy leevl");
                     Get.to(const PuzzlePageLayout(level: 0));
                   },
                 ),
@@ -51,8 +50,6 @@ class NewGame extends StatelessWidget {
                 LevelButton(
                   text: "hard",
                   onpressed: () {
-                    print("hard leevl");
-
                     Get.to(const PuzzlePageLayout(level: 1));
                   },
                 ),
@@ -62,7 +59,6 @@ class NewGame extends StatelessWidget {
                 LevelButton(
                   text: "evil",
                   onpressed: () {
-                    print("evil leevl");
                     Get.to(const PuzzlePageLayout(level: 2));
                   },
                 ),

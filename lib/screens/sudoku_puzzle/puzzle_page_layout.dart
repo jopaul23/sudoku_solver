@@ -7,6 +7,7 @@ import 'package:sudoku/controllers/sudoku_controller.dart';
 import 'package:sudoku/screens/sudoku_puzzle/function_btns.dart';
 import 'package:sudoku/screens/sudoku_puzzle/number_btn.dart';
 import 'package:sudoku/screens/sudoku_puzzle/top_bar.dart';
+import 'package:sudoku/sudoku_generator/generator.dart';
 import 'package:sudoku/widgets/table/sudoku_table.dart';
 
 class PuzzlePageLayout extends StatefulWidget {
@@ -18,9 +19,20 @@ class PuzzlePageLayout extends StatefulWidget {
 
 class _PuzzlePageLayoutState extends State<PuzzlePageLayout> {
   bool isPaused = false;
+  late SudokuController sudokuController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    sudokuController = Get.put(SudokuController());
+    SudokuGenerator.init().then((sudokku) async {
+      sudokuController.sudokuList = await sudokku.generate(Level.easy);
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    SudokuController sudokuController = Get.put(SudokuController());
     return SafeArea(
       child: Scaffold(
         body: Container(

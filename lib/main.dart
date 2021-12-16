@@ -9,11 +9,12 @@ import 'package:path_provider/path_provider.dart';
 
 import 'screens/home_page/home_page_layout.dart';
 
-void main() {
-  WidgetsBinding.instance?.addPostFrameCallback((_) async {
-    Directory dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-  });
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Directory dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+
   runApp(const MyApp());
 }
 

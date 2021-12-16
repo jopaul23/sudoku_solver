@@ -160,7 +160,7 @@ class SudokuController extends GetxController {
     if (top >= 0) {
       List<int> lastUpdated = changeStack[top];
       --top < 0 ? top = 0 : top = top;
-      print("top $top");
+
       List<int> previousUpdate = changeStack[top];
       sudokuList[lastUpdated[0]][lastUpdated[1]] = lastUpdated[2];
       selectedCellRow = previousUpdate[0];
@@ -189,7 +189,7 @@ class SudokuController extends GetxController {
     List<int> pencilListOfCell =
         pencilList[selectedCellRow][selectedCellColumn];
     pencilListOfCell.addIf(!pencilListOfCell.contains(n), n);
-    print("pencilList $pencilList");
+
     update();
   }
 

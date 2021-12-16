@@ -14,8 +14,12 @@ class SudokuGenerator {
   final bool useCache;
   String error = "";
   late Box<List<List<int>>> _cacheBox;
-  SudokuGenerator({this.useCache = true}) {
-    _cacheBox = Hive.box('sudoku_cache');
+  SudokuGenerator._({this.useCache = true});
+
+  static Future<SudokuGenerator> init({useCache = true}) async {
+    final sudokku = SudokuGenerator._(useCache: useCache);
+    sudokku._cacheBox = await Hive.openBox('sudoku_cache');
+    return sudokku;
   }
 
   Future<List<List<int>>> generate(Level type) async {
@@ -31,6 +35,7 @@ class SudokuGenerator {
     try {
       final response = await _request(url + level);
       if (response != null && response.statusCode == 200) {
+        debugPrint(jsonDecode(response.body)["board"]);
         board = jsonDecode(response.body)["board"];
       } else {
         error = "status code is ${response?.statusCode}";
